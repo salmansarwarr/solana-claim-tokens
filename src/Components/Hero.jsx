@@ -1,5 +1,5 @@
 
-import bg4 from '../assets/Images/bg4.JPG';
+import bg4 from '../assets/Images/bg4.jpg';
 const Hero = () => {
   return (
     <section className="w-full bg-gradient-to-r h-[80vh] pt-[5%]">
