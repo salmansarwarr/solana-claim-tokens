@@ -1,5 +1,5 @@
 import MethaLogo1 from '../assets/Images/MethaLogo1.png';
-import bg3 from '../assets/Images/bg3.JPG';
+import bg3 from '../assets/Images/bg3.jpg';
 
 
 const Civilisation = () => {
@@ -17,9 +17,9 @@ const Civilisation = () => {
                 src={bg3}
                 alt="Background"
                 className="absolute top-[14%] right-0 w-[100px] object-contain z-0 transition-transform duration-500 ease-in-out"
-               
+
             />
-          
+
         </section>
     );
 };
