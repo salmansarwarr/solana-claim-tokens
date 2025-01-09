@@ -17,7 +17,7 @@ const Navbar = () => {
       <img
         src={bg5new}
         alt="Background"
-        className="absolute top-[0%] left-[50%] w-[200px] object-contain z-0 transition-transform duration-500 ease-in-out"
+        className="hidden lg:block absolute top-[0%] left-[50%] w-[200px] object-contain z-0 transition-transform duration-500 ease-in-out"
 
       />
 
