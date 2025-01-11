@@ -35,7 +35,7 @@ const Hero = () => {
       <img
         src={bg4}
         alt="Background"
-        className="z-[-1] absolute top-[40%] left-0 w-[50px] sm:w-[70px] md:w-[100px] object-contain lg:z-0 transition-transform duration-500 ease-in-out"
+        className="z-[-1] absolute top-[40%] left-0 w-[50px] sm:w-[70px] md:w-[100px] object-contain transition-transform duration-500 ease-in-out"
       />
     </section>
   );
