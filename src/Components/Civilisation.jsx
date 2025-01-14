@@ -3,7 +3,7 @@ import bg3 from '../assets/Images/bg3.jpg';
 
 const Civilisation = () => {
     return (
-        <section className="relative w-full lg:h-[60vh] h-auto flex flex-col md:flex-row justify-center items-center gap-8 md:gap-32 overflow-hidden">
+        <section className="relative w-full lg:h-[30vh] h-auto flex flex-col md:flex-row justify-center items-center gap-8 md:gap-32 overflow-hidden">
             {/* Text and Logo */}
             <img
                 src={MethaLogo1}

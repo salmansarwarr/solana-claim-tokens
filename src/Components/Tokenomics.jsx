@@ -3,7 +3,7 @@
 const TokenomicsSection = () => {
     const tokenomicsData = [
         {
-            title: 'Supply',
+            title: 'Info',
             items: [
                 { label: 'Supply', value: '21m' },
                 { label: 'Blockchain', value: 'Sol' },
@@ -13,7 +13,7 @@ const TokenomicsSection = () => {
             gradientClass: 'bg-gradient-to-br from-pink-100 to-purple-100',
         },
         {
-            title: 'LP & Tax',
+            title: 'Allocation',
             items: [
                 { label: 'LP', value: '48%' },
                 { label: 'V1', value: '10%' },
@@ -24,9 +24,9 @@ const TokenomicsSection = () => {
             gradientClass: 'bg-gradient-to-br from-purple-100 to-blue-100',
         },
         {
-            title: 'Tax Info',
+            title: 'Tax',
             items: [
-                { label: 'Tax', value: '3/3' },
+                { label: 'Buy/Sell', value: '3%/3%' },
                 { label: 'LP', value: '1%' },
                 { label: 'Dev', value: '1%' },
                 { label: 'Prize Pool', value: '1%' },
@@ -36,7 +36,7 @@ const TokenomicsSection = () => {
     ];
 
     const CategoryCard = ({ title, items, gradientClass }) => (
-        <div className={`${gradientClass} rounded-3xl p-6 shadow-lg backdrop-blur-sm`}>
+        <div className={`${gradientClass} rounded-3xl p-6 backdrop-blur-sm`}>
             <h3 className="text-lg md:text-xl font-semibold mb-3 text-gray-800">{title}</h3>
             <div className="space-y-2">
                 {items.map(({ label, value }) => (
@@ -62,13 +62,13 @@ const TokenomicsSection = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4 bg-[#f1f4f7] p-6 sm:p-10 w-full md:w-2/3 lg:w-1/2 mx-auto rounded-lg">
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
-                        Dextools
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-[30px] transition-colors">
+                        DEXTools 
                     </button>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
-                        Website Chart
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-[30px] transition-colors">
+                        DEXScreener 
                     </button>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                    <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-[30px] transition-colors">
                         CMC
                     </button>
                 </div>

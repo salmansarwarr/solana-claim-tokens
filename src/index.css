@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
-body{
-    font-family: "Poppins", serif;
+@font-face {
+    font-family: 'Littera Plain Book';
+    src: url('./Utils/Fonts/LitteraPlainBook.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Littera Plain Book', serif;
 }

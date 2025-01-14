@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent bg-opacity-90 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
 
       <img
         src={bg5new}
@@ -71,7 +71,7 @@ const Navbar = () => {
           {/* Desktop Right Links */}
           <div className="hidden md:block">
             <div className="ml-4  md:ml-6">
-              <button className="flex items-center px-2 py-1  gap-1 border rounded-lg">
+              <button className="flex items-center px-3 py-1  gap-1 border rounded-[30px]">
                 <img src={logo1} className="w-8 mt-[8px]" alt="" />
                 <p className="text-[13px]">$METH Swap</p>
              </button>

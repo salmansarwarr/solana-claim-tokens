@@ -14,7 +14,7 @@ const Hero = () => {
             <p className="text-base sm:text-lg md:text-xl text-gray-700">
               A Fart Suckerturd quest for world domination
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-[500] py-3 px-6 sm:px-8 rounded-lg transition-colors">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-[500] py-3 px-6 sm:px-8 rounded-[30px] transition-colors">
               Get a Bag
             </button>
           </div>
