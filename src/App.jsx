@@ -3,6 +3,8 @@ import Home from './Pages/Home';
 import Navbar from './Elements/Navbar';
 import Footer from './Components/Footer';
 
+import TokenClaimPage from './Pages/TokenClaimPage';
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/claim-token" element={<TokenClaimPage />} />
         </Routes>
 
         <Footer />

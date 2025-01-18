@@ -61,6 +61,12 @@ const Navbar = () => {
                 >
                   Telegram
                 </Link>
+                <Link
+                  to="/claim-token"
+                  className="text-sm font-medium text-gray-900 hover:text-gray-600 px-3 py-2 rounded-md transition-colors duration-300"
+                >
+                  Claim Token
+                </Link>
 
               </div>
             </article>
