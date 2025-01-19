@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Wallet, Lock, ArrowRight } from 'lucide-react';
+import { Wallet, Lock, ArrowRight, Coins } from 'lucide-react';
 
 const TokenClaimPage = () => {
     const [isWalletConnected, setIsWalletConnected] = useState(false);
+    const [solanaAddress, setSolanaAddress] = useState('');
 
     return (
         <div className="min-h-screen bg-gradient-to-b from-white to-[#F8F0FF] p-8">
@@ -35,12 +36,43 @@ const TokenClaimPage = () => {
                                 <button
                                     onClick={() => setIsWalletConnected(!isWalletConnected)}
                                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all
-                    ${isWalletConnected
+                                    ${isWalletConnected
                                             ? 'bg-green-50 text-green-600 hover:bg-green-100'
                                             : 'bg-blue-600 text-white hover:bg-blue-700'}`}
                                 >
                                     {isWalletConnected ? 'Connected' : 'Connect Wallet'}
                                 </button>
+                            </div>
+                        </div>
+
+                        {/* ETH Balance Card */}
+                        <div className="bg-[#F8F0FF] p-6 rounded-lg border border-blue-600/10">
+                            <div className="flex items-center justify-between">
+                                <div className="flex items-center space-x-3">
+                                    <Coins className="w-6 h-6 text-blue-600" />
+                                    <span className="font-medium text-[#2D3748]">ETH Balance</span>
+                                </div>
+                                <span className="text-lg font-bold text-[#2D3748]">
+                                    {isWalletConnected ? '2.5 ETH' : '-.-- ETH'}
+                                </span>
+                            </div>
+                        </div>
+
+                        {/* Solana Address Input */}
+                        <div className="bg-[#F8F0FF] p-6 rounded-lg border border-blue-600/10">
+                            <div className="space-y-3">
+                                <label htmlFor="solana-address" className="block text-sm font-medium text-gray-700">
+                                    Enter Solana Address
+                                </label>
+                                <input
+                                    id="solana-address"
+                                    type="text"
+                                    value={solanaAddress}
+                                    onChange={(e) => setSolanaAddress(e.target.value)}
+                                    placeholder="Solana wallet address"
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all bg-white/90"
+                                    disabled={!isWalletConnected}
+                                />
                             </div>
                         </div>
 
@@ -66,9 +98,9 @@ const TokenClaimPage = () => {
 
                         {/* Claim Button */}
                         <button
-                            disabled={!isWalletConnected}
+                            disabled={!isWalletConnected || !solanaAddress}
                             className={`w-full py-4 rounded-lg font-medium flex items-center justify-center space-x-2
-                ${isWalletConnected
+                            ${isWalletConnected && solanaAddress
                                     ? 'bg-blue-600 text-white hover:bg-blue-700 transition-all'
                                     : 'bg-gray-100 text-gray-400 cursor-not-allowed'}`}
                         >
