@@ -1,5 +1,5 @@
 {
-  "address": "DWpYMKiYBVFZ2eA5AdHotrYDqdSSFvMZbVoR1HPvApuG",
+  "address": "6WJyCHo7YvrSCuuh3FbbD3TwwLZTdwsbh8r7o6fRG6Ga",
   "metadata": {
     "name": "meth",
     "version": "0.1.0",
@@ -105,6 +105,21 @@
       ]
     }
   ],
+  "accounts": [
+    {
+      "name": "Meth",
+      "discriminator": [
+        184,
+        76,
+        17,
+        35,
+        187,
+        243,
+        17,
+        184
+      ]
+    }
+  ],
   "errors": [
     {
       "code": 6000,
@@ -115,6 +130,58 @@
       "code": 6001,
       "name": "InsufficientFunds",
       "msg": "Insufficient funds"
+    }
+  ],
+  "types": [
+    {
+      "name": "Meth",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_tokens",
+            "type": "u64"
+          },
+          {
+            "name": "claimed_tokens",
+            "type": "u64"
+          },
+          {
+            "name": "recipients",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Recipient"
+                }
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Recipient",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          }
+        ]
+      }
     }
   ]
 }

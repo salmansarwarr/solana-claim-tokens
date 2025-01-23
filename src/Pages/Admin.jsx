@@ -7,6 +7,7 @@ import idl from "../assets/meth.json";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { Buffer } from "buffer";
 import { toast } from "react-toastify";
+import { tokenDecimals } from "../constants/constants";
 
 const programId = new PublicKey(idl.address);
 const network = clusterApiUrl("devnet");
@@ -76,7 +77,7 @@ const Admin = () => {
             return;
         }
 
-        const totalTokens = new BN(totalTokensInput);
+        const totalTokens = new BN(totalTokensInput * Math.pow(10, tokenDecimals));
         const provider = getProvider();
         const program = new Program(idl, provider);
         const [methPDA, bump] = PublicKey.findProgramAddressSync(

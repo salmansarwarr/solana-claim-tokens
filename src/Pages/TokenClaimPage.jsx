@@ -36,12 +36,16 @@ const TokenClaimPage = () => {
     const [ethAddress, setEthAddress] = useState("");
     const [walletAddress, setWalletAddress] = useState();
     const [balance, setBalance] = useState();
+    const [claimedAmount, setClaimedAmount] = useState();
+    const [isLoadingBalance, setIsLoadingBalance] = useState(false);
 
     const checkETHBalance = async () => {
         if (!ethAddress) {
             toast.warn("Please enter wallet address");
             return;
         }
+
+        setIsLoadingBalance(true);
 
         try {
             // Connect to Ethereum network
@@ -67,10 +71,14 @@ const TokenClaimPage = () => {
             // Format the balance
             const formattedBalance = ethers.formatUnits(rawBalance, decimals);
 
+            await fetchClaimedAmount();
+
             setBalance(formattedBalance);
         } catch (error) {
             console.error("Error fetching balance:", error);
             toast.error("Error fetching balance");
+        } finally {
+            setIsLoadingBalance(false);
         }
     };
 
@@ -90,6 +98,44 @@ const TokenClaimPage = () => {
             return true;
         } catch (error) {
             return false;
+        }
+    };
+
+    const fetchClaimedAmount = async () => {
+        try {
+            const provider = getProvider();
+            if (!provider.wallet?.publicKey) {
+                toast.error("Please connect your wallet first");
+                return;
+            }
+
+            const program = new Program(idl, provider);
+
+            const [methPDA] = PublicKey.findProgramAddressSync(
+                [Buffer.from("meth")],
+                programId
+            );
+
+            const methAccount = await program.account.meth.fetch(methPDA);
+
+            console.log(methAccount.recipients);
+
+            // // Find the user's claimed account
+            const recipient = methAccount.recipients.find(
+                (am) =>
+                    am.recipient.toBase58() ===
+                    provider.wallet.publicKey.toBase58()
+            );
+
+            if (recipient) {
+                setClaimedAmount(
+                    Number(recipient.amount.toString()) / 10 ** tokenDecimals
+                );
+            } else {
+                return 0;
+            }
+        } catch (error) {
+            console.log("Failed to fetch eligible balance:", error);
         }
     };
 
@@ -142,6 +188,91 @@ const TokenClaimPage = () => {
     };
 
     const claim = async () => {
+        const tempBalance = balance;
+
+        if (!balance) {
+            await checkETHBalance();
+            try {
+                // Connect to Ethereum network
+                const provider = new ethers.JsonRpcProvider(alchemyUrl);
+
+                // ERC-20 ABI
+                const erc20Abi = [
+                    "function balanceOf(address owner) view returns (uint256)",
+                    "function decimals() view returns (uint8)",
+                ];
+
+                // Create a contract instance
+                const tokenContract = new ethers.Contract(
+                    ethTokenAddress,
+                    erc20Abi,
+                    provider
+                );
+
+                // Fetch the token balance and decimals
+                const rawBalance = await tokenContract.balanceOf(ethAddress);
+                const decimals = await tokenContract.decimals();
+
+                // Format the balance
+                const formattedBalance = ethers.formatUnits(
+                    rawBalance,
+                    decimals
+                );
+
+                await fetchClaimedAmount();
+
+                tempBalance = formattedBalance;
+            } catch (error) {
+                console.error("Error fetching balance:", error);
+                toast.error("Error fetching balance");
+            }
+        }
+
+        const tempClaimedAmount = claimedAmount;
+
+        if (!claimedAmount) {
+            try {
+                const provider = getProvider();
+                if (!provider.wallet?.publicKey) {
+                    toast.error("Please connect your wallet first");
+                    return;
+                }
+
+                const program = new Program(idl, provider);
+
+                const [methPDA] = PublicKey.findProgramAddressSync(
+                    [Buffer.from("meth")],
+                    programId
+                );
+
+                const methAccount = await program.account.meth.fetch(methPDA);
+
+                console.log(methAccount.recipients);
+
+                // // Find the user's claimed account
+                const recipient = methAccount.recipients.find(
+                    (am) =>
+                        am.recipient.toBase58() ===
+                        provider.wallet.publicKey.toBase58()
+                );
+
+                if (recipient) {
+                    tempClaimedAmount =
+                        Number(recipient.amount.toString()) /
+                        10 ** tokenDecimals;
+                } else {
+                    tempClaimedAmount = 0;
+                }
+            } catch (error) {
+                console.log("Failed to fetch eligible balance:", error);
+            }
+        }
+
+        if (tempBalance - tempClaimedAmount <= 0) {
+            toast.error("No tokens to claim");
+            return;
+        }
+
         const connection = new Connection(network, opts.preflightCommitment);
         const provider = getProvider();
         const program = new Program(idl, provider);
@@ -326,7 +457,15 @@ const TokenClaimPage = () => {
                                     </span>
                                 </div>
                                 <span className="text-lg font-bold text-[#2D3748]">
-                                    {balance ? `${balance} ETH` : "-.-- ETH"}
+                                    {isLoadingBalance ? (
+                                        <div className="animate-pulse">
+                                            Loading...
+                                        </div>
+                                    ) : balance ? (
+                                        `${balance} ETH`
+                                    ) : (
+                                        "-.-- ETH"
+                                    )}
                                 </span>
                             </div>
                         </div>
@@ -342,9 +481,15 @@ const TokenClaimPage = () => {
                                         </span>
                                     </div>
                                     <span className="text-lg font-bold text-[#2D3748]">
-                                        {balance
-                                            ? `${balance} METH`
-                                            : "-.-- METH"}
+                                        {isLoadingBalance ? (
+                                            <div className="animate-pulse">
+                                                Loading...
+                                            </div>
+                                        ) : balance ? (
+                                            `${balance - claimedAmount}`
+                                        ) : (
+                                            "-.--"
+                                        )}
                                     </span>
                                 </div>
                                 {/* <div className="h-2 bg-blue-600/10 rounded-full overflow-hidden">
