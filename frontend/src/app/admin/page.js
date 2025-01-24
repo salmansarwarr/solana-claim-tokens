@@ -5,7 +5,6 @@ import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
 import React, { useEffect, useState } from "react";
 import idl from "../assets/meth.json";
 import { TOKEN_PROGRAM_ID } from "@solana/spl-token";
-import { Buffer } from "buffer";
 import { toast } from "react-toastify";
 import { tokenDecimals } from "../constants/constants";
 
@@ -18,7 +17,7 @@ const opts = {
 const truncate = (str, maxLength) =>
     str.length > maxLength ? `${str.slice(0, maxLength)}...` : str;
 
-const Admin = () => {
+const Page = () => {
     const [message, setMessage] = useState("");
     const [totalTokensInput, setTotalTokensInput] = useState("");
     const [walletAddress, setWalletAddress] = useState();
@@ -152,4 +151,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default Page;

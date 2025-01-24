@@ -1,7 +1,7 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{ self, Token, Transfer };
 
-declare_id!("FR7NVcRWT5WWDAXvNKvJqbFKF4Nm3urGqFvnBwAbktkv");
+declare_id!("2bZGfFgJcEfkXNJjuvsTPcTafFxC8Wnnh9HkPJ9bKasX");
 
 #[program]
 pub mod meth {

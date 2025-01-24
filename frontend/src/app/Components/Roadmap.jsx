@@ -1,3 +1,4 @@
+'use client'
 
 import { motion } from 'framer-motion';
 import { Bomb, TrendingDown, Coins, Users, Globe } from 'lucide-react';

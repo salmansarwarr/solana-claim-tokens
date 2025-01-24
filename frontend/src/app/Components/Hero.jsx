@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import bg4 from '../assets/Images/bg4.jpg';
 
 const Hero = () => {
@@ -32,7 +33,7 @@ const Hero = () => {
         </aside>
       </article>
 
-      <img
+      <Image
         src={bg4}
         alt="Background"
         className="z-[-1] absolute top-[40%] left-0 w-[50px] sm:w-[70px] md:w-[100px] object-contain transition-transform duration-500 ease-in-out"
