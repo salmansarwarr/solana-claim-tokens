@@ -4,8 +4,8 @@ import { useState } from "react";
 import logo from "../assets/Images/MethaLogo2.png";
 import logo1 from "../assets/Images/MethaLogo.png";
 import bg5new from "../assets/Images/bg5new.png";
-import { Link } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
